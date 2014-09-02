@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <title>Halo 1 Timer</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <link href="bower_components/bootstrap/docs/assets/css/bootstrap.css" rel="stylesheet"/>
+    <link href="bower_components/bootstrap/docs/assets/css/bootstrap-responsive.css" rel="stylesheet"/>
+    <link href="docs/css/docs.css" rel="stylesheet"/>
+    <link href="docs/css/prettify.css" rel="stylesheet"/>
+    <script src="bower_components/jquery/jquery.min.js"></script>
+    <script src="bower_components/angular/angular.min.js"></script>
+    <script src="bower_components/bootstrap/docs/assets/js/bootstrap.min.js"></script>
+    <script src="app/js/timer.js"></script>
+    <script src="docs/docs.js"></script>
+
+
+</head>
+
+
+
+<body style="background:grey;" ng-app="timer-demo" ng-controller="TimerDemoController">
+
+<script type="text/javascript">
+	
+	//			audioElement.loop=true;
+
+function resetBtn() {
+	
+			location.reload();
+			};
+
+
+		
+		
+
+function seconds20(){
+		var sec20 = document.createElement('audio');
+       	sec20.setAttribute('src', 'media/30sec.mp3');
+		sec20.play();
+};
+
+function stopBtn(){
+				
+				stopTimer('main-timer');
+        		stopTimer('camo-timer');
+        		stopTimer('os-timer');
+        		stopTimer('rocket-timer');
+				if ($('#add2Btn').css('display') == 'none') {
+    				alert('Start Timer First');
+				} else 	{			
+				$("#stopBtn").hide();
+				$("#add2Btn").hide();
+				$("#resumeBtn").show();
+				}
+};
+function resumeBtn(){
+				setTimeout(checkTime, 1000);
+		        startTimer('main-timer');
+    		    startTimer('camo-timer');
+		        startTimer('os-timer');
+        		startTimer('rocket-timer');
+				$("#resumeBtn").hide();
+				$("#stopBtn").show();
+				$("#add2Btn").show();
+				
+
+};
+
+function timerStart(){
+				setTimeout(checkTime, 1000);
+				$("#startBtn").hide();
+				$("#add2Btn").show();
+				setTimeout(function(){
+					startTimer('main-timer'),
+					startTimer('camo-timer'),
+					startTimer('os-timer'),
+					startTimer('rocket-timer')
+					},
+					2000
+				 );
+				
+};
+
+function timerDelay1(){
+				stopTimer('main-timer');
+		        stopTimer('camo-timer');
+        		stopTimer('os-timer');
+		        stopTimer('rocket-timer');
+				$("#resumeBtn").hide();
+				$("#stopBtn").show();
+				
+				setTimeout(function(){
+					startTimer('main-timer'),
+					startTimer('camo-timer'),
+					startTimer('os-timer'),
+					startTimer('rocket-timer')
+					},
+					2000
+				 );
+				//audioElement.play();
+				//audioElement.currentTime = audioElement.currentTime -.99;
+};
+
+
+
+	
+
+
+
+
+</script>
+
+<div class="container page-content">
+<div style="position: fixed; top: 0em; left: 0em;">
+<button class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-circle-arrow-left"></span> BACK</button>
+</div>
+
+
+<!-- Main-timer Open Div -->
+<div id="main-timer">
+
+            <timer interval="1000" countdown="1800" autostart="false">
+            <div id="largeTime" style="text-align:center;	line-height:100%; width:90%; color:#fff; float:right;">
+            
+            
+            {{minutes}}:<span id="sec">{{sseconds}}</span>
+
+            </div>
+            
+           
+    </timer>
+   
+              
+  <!-- Begin Camo bar  --> 
+  <div id="camo-timer">
+<timer max-time-unit="'second'" interval="1000" countdown="60" autostart="false">           
+            
+                <div style="display:inline-block; width:80%;" class="progress progress-striped">
+                    <div class="bar" style="min-width:50px; width: {{(((60-seconds)/60)*100)+2| number:0}}%;">
+	                     <div style="float:right;"><img style="max-height:80%;min-width:40px; margin-top:5px; margin-right:5px;" src="images/camo.png">
+                         </div>
+                            </div>
+                            
+                </div>
+                
+                <div id="smallTime" style="float:right; display:table; width:19%; color:#fff; margin:0 auto; text-align:center; line-height:50px;">
+                			
+                            {{sseconds}}</div>
+</timer>
+</div>               
+          
+
+
+
+<!-- Begin OS bar  2 min count down-->
+
+
+<div id="os-timer">
+<timer max-time-unit="'second'" interval="1000" countdown="120" autostart="false">
+	
+<div style="display:inline-block; width:80%;" class="progress progress-danger">
+                    <div class="bar" style="min-width:50px; width:
+                    {{(((120-seconds)/120)*100)| number:0}}%;">
+	                     <div style="float:right;"><img style="max-height:80%;min-width:40px; margin-top:5px; margin-right:5px;" src="images/os.png">
+                         </div>
+                            </div>
+                            
+                </div>
+                
+                <div id="smallTime2" style="float:right; display:table; width:19%; color:#fff; margin:0 auto; text-align:center; line-height:50px;">
+                			
+                         
+                          {{sseconds}} </div>
+
+
+
+</timer></div>
+
+
+
+
+
+
+
+
+<!-- Begin Rocket bar  -->
+
+<div id="rocket-timer">
+<timer max-time-unit="'second'" interval="1000" countdown="90" autostart="false">
+
+<div style="display:inline-block; width:80%;" class="progress progress-warning">
+                    <div class="bar" style="min-width:50px; width: {{(((90-seconds)/90)*100) | number:0}}%;">
+	                     <div style="float:right;"><img style="max-height:80%;min-width:40px; margin-top:5px; margin-right:5px;" src="images/rockets.png">
+                         </div>
+                            </div>
+                            
+                </div>
+                
+                <div id="smallTime3" style="float:right; display:table; width:19%; color:#fff; margin:0 auto; text-align:center; line-height:50px;">
+                			
+                            {{sseconds}}</div>
+
+</timer>                                                        
+</div>                    
+                            
+                            
+                            
+
+
+<!-- Button div -->
+ <div  style="margin:0 auto; display:block; text-align:center;  width:100%">
+	
+    <!-- Start Button -->
+		<button id="startBtn" style="width:30%;" class="btn btn-success" 
+		onclick="timerStart()" type="button"><i class="icon-white icon-play"></i></button>
+    
+    <!-- Add 2 seconds Button -->    
+        <button id="add2Btn" style="width:30%; display:none;" class="btn btn-info" 
+		onclick="timerDelay1()" type="button">+ :02</button>
+        
+    <!-- Stop Button -->
+        <button id="stopBtn" style="width:30%;" class="btn btn-danger" 
+        onclick="stopBtn()" type="button"><i class="icon-white icon-stop"></i></button>
+        
+	<!-- Resume Button -->
+        <button id="resumeBtn" style="width:30%; display:none;" class="btn btn-inverse" 
+        onclick="resumeBtn()" type="button">RESUME</button>
+        
+	<!-- Reset Button -->
+        <button style="width:25%;" class="btn btn-inverse" 
+        onclick="resetBtn()" type="button">RESET</button>
+            
+            
+            </div>
+
+ </div> <!-- close div for main-timer -->
+
+
+</div>
+<script src="docs/prettify.js"></script>
+<script src="docs/application.js"></script>
+<script src="docs/jquery.fittext.js"></script>
+	<script type="text/javascript">
+		$("#largeTime").fitText(0.5, { minFontSize: '100px', maxFontSize: '750px' });
+		$("#smallTime").fitText(0.4, { minFontSize: '35px', maxFontSize: '100px' });
+		$("#smallTime2").fitText(0.4, { minFontSize: '35px', maxFontSize: '100px' });
+		$("#smallTime3").fitText(0.4, { minFontSize: '35px', maxFontSize: '100px' });
+
+$(function(){
+  $.ajax({
+		  url: "media/30sec.mp3",
+		  url: "media/20sec.mp3",
+		  url: "media/10.mp3",
+		  url: "media/9.mp3",
+		  url: "media/8.mp3",
+		  url: "media/7.mp3",
+		  url: "media/6.mp3",
+		  url: "media/5.mp3",
+		  url: "media/4.mp3",
+		  url: "media/3.mp3",
+		  url: "media/2.mp3",
+		  url: "media/1.mp3",
+		  url: "media/beepbeep.mp3",
+	  });
+});
+
+
+	
+		var sec = document.getElementById('sec').innerHTML;
+	var sec50 = document.createElement('audio');
+       	sec50.setAttribute('src', 'media/50sec.mp3');
+	var sec40 = document.createElement('audio');
+       	sec40.setAttribute('src', 'media/40sec.mp3');
+	var sec30 = document.createElement('audio');
+       	sec30.setAttribute('src', 'media/30sec.mp3');
+	var sec20 = document.createElement('audio');
+      	sec20.setAttribute('src', 'media/20sec.mp3');
+	var sec10 = document.createElement('audio');
+      	sec10.setAttribute('src', 'media/10.mp3');
+	var sec9 = document.createElement('audio');
+      	sec9.setAttribute('src', 'media/9.mp3');
+	var sec8 = document.createElement('audio');
+      	sec8.setAttribute('src', 'media/8.mp3');
+	var sec7 = document.createElement('audio');
+      	sec7.setAttribute('src', 'media/7.mp3');
+	var sec6 = document.createElement('audio');
+      	sec6.setAttribute('src', 'media/6.mp3');
+	var sec5 = document.createElement('audio');
+      	sec5.setAttribute('src', 'media/5.mp3');
+	var sec4 = document.createElement('audio');
+      	sec4.setAttribute('src', 'media/4.mp3');
+	var sec3 = document.createElement('audio');
+      	sec3.setAttribute('src', 'media/3.mp3');
+	var sec2 = document.createElement('audio');
+      	sec2.setAttribute('src', 'media/2.mp3');
+	var sec1 = document.createElement('audio');
+      	sec1.setAttribute('src', 'media/1.mp3');
+	var beep = document.createElement('audio');
+      	beep.setAttribute('src', 'media/beepbeep.mp3');	
+	
+
+
+function checkTime(){
+		var sec = document.getElementById('sec').innerHTML;
+
+		if (sec == 50) {
+			sec50.play();
+			}
+		if (sec == 40) {
+			sec40.play();
+		}
+		if (sec == 30) {
+			sec30.play();
+		} 
+		if (sec == 20){
+			sec20.play();
+		} 
+		if (sec == 10){
+			sec10.play();
+		} 
+		if (sec == 9){
+			sec9.play();
+		} 
+		if (sec == 8){
+			sec8.play();
+		} 
+		if (sec == 7){
+			sec7.play();
+		} 
+		if (sec == 6){
+			sec6.play();
+		} 
+		if (sec == 5){
+			sec5.play();
+		} 
+		if (sec == 4){
+			sec4.play();
+		} 
+		if (sec == 3){
+			sec3.play();
+		} 
+		if (sec == 2){
+			sec2.play();
+		} 
+		if (sec == 1){
+			sec1.play();
+		} 
+		if (sec == 0){
+			beep.play();
+		} 
+	
+		var hotDog;
+		
+		hotDog = setTimeout(checkTime, 1000);
+		
+		$('#stopBtn').click(function(){
+		
+			clearTimeout(hotDog)
+		});
+		
+};
+
+
+	
+	
+	
+
+	
+
+</script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="bower_components/angular/angular.min.js"></script>
+    <script src="app/js/timer.js"></script>
+    <script src="docs/playsound.js"></script>
+    
+
+    <script>
+	
+	var audioElement = document.createElement('audio');
+  		audioElement.setAttribute('src', 'media/30sec.mp3');
+	
+        angular.module('MyApp', ['timer']);
+        function MyAppController($scope) {
+            $scope.timerRunning = false;
+ 
+            $scope.startTimer = function (){
+                $scope.$broadcast('timer-start');
+                $scope.timerRunning = true;
+            };
+ 
+            $scope.stopTimer = function (){
+                $scope.$broadcast('timer-stop');
+                $scope.timerRunning = false;
+            };
+ 
+            $scope.$on('timer-stopped', function (event, data){
+                console.log('Timer Stopped - data = ', data);
+            });
+        }
+	
+		
+        MyAppController.$inject = ['$scope'];
+    		
+			if(MyApp.seconds === 55){
+		audioElement.play();
+		
+		};
+    
+    </script>
+</head>
+<body ng-app="MyApp">
+    <div ng-controller="MyAppController">
+        <h1>AngularJS - Single Timer Example</h1>
+        <h3><timer countdown="1800" autostart="false" interval="1000">
+        {{mminutes}}:{{sseconds}}
+        </timer></h3>
+        <button ng-click="startTimer()" ng-disabled="timerRunning">Start Timer</button>
+        <button ng-click="stopTimer()" ng-disabled="!timerRunning">Stop Timer</button>
+    </div>
+    <br/>
+</body>
+</html>

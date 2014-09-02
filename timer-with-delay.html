@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <title>Halo 1 Timer</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <link href="bower_components/bootstrap/docs/assets/css/bootstrap.css" rel="stylesheet"/>
+    <link href="bower_components/bootstrap/docs/assets/css/bootstrap-responsive.css" rel="stylesheet"/>
+    <link href="docs/css/docs.css" rel="stylesheet"/>
+    <link href="docs/css/prettify.css" rel="stylesheet"/>
+    <script src="bower_components/jquery/jquery.min.js"></script>
+    <script src="bower_components/angular/angular.min.js"></script>
+    <script src="bower_components/bootstrap/docs/assets/js/bootstrap.min.js"></script>
+    <script src="app/js/timer.js"></script>
+    <script src="docs/docs.js"></script>
+
+
+</head>
+
+
+
+<body style="background:grey;" ng-app="timer-demo" ng-controller="TimerDemoController">
+
+<script type="text/javascript">
+	var audioElement = document.createElement('audio');
+        		audioElement.setAttribute('src', 'media/halo_timer.mp3');
+				audioElement.loop=true;
+
+function resetBtn() {
+	
+			location.reload();
+			};
+
+function audio(){
+
+				audioElement.play();
+};
+
+function stopBtn(){
+				audioElement.pause();
+				stopTimer('main-timer');
+        		stopTimer('camo-timer');
+        		stopTimer('os-timer');
+        		stopTimer('rocket-timer');
+				$("#stopBtn").hide();
+				$("#resumeBtn").show();
+};
+function resumeBtn(){
+				audioElement.play();
+		        startTimer('main-timer');
+    		    startTimer('camo-timer');
+		        startTimer('os-timer');
+        		startTimer('rocket-timer');
+				$("#resumeBtn").hide();
+				$("#stopBtn").show();
+
+};
+
+function timerStart(){
+				
+				$("#startBtn").hide();
+				$("#add2Btn").show();
+				setTimeout(function(){
+					audioElement.play(),
+					startTimer('main-timer'),s
+					startTimer('camo-timer'),
+					startTimer('os-timer'),
+					startTimer('rocket-timer')
+					},
+					2000
+				 );
+				//audioElement.play();
+				//audioElement.currentTime = audioElement.currentTime -.99;
+};
+
+function timerDelay1(){
+				stopTimer('main-timer');
+		        stopTimer('camo-timer');
+        		stopTimer('os-timer');
+		        stopTimer('rocket-timer');
+				audioElement.pause();
+				setTimeout(function(){
+					audioElement.play(),
+					startTimer('main-timer'),
+					startTimer('camo-timer'),
+					startTimer('os-timer'),
+					startTimer('rocket-timer')
+					},
+					2000
+				 );
+				//audioElement.play();
+				//audioElement.currentTime = audioElement.currentTime -.99;
+};
+
+
+</script>
+
+<div class="container page-content">
+<div style="position: fixed; top: 0em; left: 0em;">
+<button class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-circle-arrow-left"></span> BACK</button>
+</div>
+
+
+<div id="main-timer">
+  
+
+
+            <timer interval="1000" countdown="1800" autostart="false">
+            <div id="largeTime" style="text-align:center;	line-height:100%; width:90%; color:#fff; float:right;">
+            
+            
+            {{minutes}}:{{sseconds}}
+            </div>
+            
+           
+    </timer>
+   
+              
+  <!-- Begin Camo bar  --> 
+  <div id="camo-timer">
+<timer max-time-unit="'second'" interval="1000" countdown="60" autostart="false">           
+            
+                <div style="display:inline-block; width:80%;" class="progress progress-striped">
+                    <div class="bar" style="min-width:50px; width: {{(((60-seconds)/60)*100)+2| number:0}}%;">
+	                     <div style="float:right;"><img style="max-height:80%;min-width:40px; margin-top:5px; margin-right:5px;" src="images/camo.png">
+                         </div>
+                            </div>
+                            
+                </div>
+                
+                <div id="smallTime" style="float:right; display:table; width:19%; color:#fff; margin:0 auto; text-align:center; line-height:50px;">
+                			
+                            {{sseconds}}</div>
+</timer>
+</div>               
+          
+
+
+
+<!-- Begin OS bar  2 min count down-->
+
+
+<div id="os-timer">
+<timer max-time-unit="'second'" interval="1000" countdown="120" autostart="false">
+	
+<div style="display:inline-block; width:80%;" class="progress progress-danger">
+                    <div class="bar" style="min-width:50px; width:
+                    {{(((120-seconds)/120)*100)| number:0}}%;">
+	                     <div style="float:right;"><img style="max-height:80%;min-width:40px; margin-top:5px; margin-right:5px;" src="images/os.png">
+                         </div>
+                            </div>
+                            
+                </div>
+                
+                <div id="smallTime2" style="float:right; display:table; width:19%; color:#fff; margin:0 auto; text-align:center; line-height:50px;">
+                			
+                         
+                          {{sseconds}} </div>
+
+
+
+</timer></div>
+
+
+
+
+
+
+
+
+<!-- Begin Rocket bar  -->
+
+<div id="rocket-timer">
+<timer max-time-unit="'second'" interval="1000" countdown="90" autostart="false">
+
+<div style="display:inline-block; width:80%;" class="progress progress-warning">
+                    <div class="bar" style="min-width:50px; width: {{(((90-seconds)/90)*100) | number:0}}%;">
+	                     <div style="float:right;"><img style="max-height:80%;min-width:40px; margin-top:5px; margin-right:5px;" src="images/rockets.png">
+                         </div>
+                            </div>
+                            
+                </div>
+                
+                <div id="smallTime3" style="float:right; display:table; width:19%; color:#fff; margin:0 auto; text-align:center; line-height:50px;">
+                			
+                            {{sseconds}}</div>
+
+</timer>                                                        
+</div>                    
+                            
+                            
+                            
+                            
+                                   
+             
+            
+            
+            
+       
+    
+    
+    
+   
+    
+    
+   
+
+
+
+
+ <div  style="margin:0 auto; display:block; text-align:center;  margin:5px; width:100%">
+	
+    <!-- Start Button -->
+		<button id="startBtn" style="width:30%;" class="btn btn-success" 
+		onclick="timerStart()" type="button"><i class="icon-white icon-play"></i></button>
+    
+    <!-- Add 2 seconds Button -->    
+        <button id="add2Btn" style="width:30%; display:none;" class="btn btn-info" 
+		onclick="timerDelay1()" type="button">ADD :02</button>
+        
+    <!-- Stop Button -->
+        <button id="stopBtn" style="width:30%;" class="btn btn-danger" 
+        onclick="stopBtn()" type="button"><i class="icon-white icon-stop"></i></button>
+        
+	<!-- Resume Button -->
+        <button id="resumeBtn" style="width:30%; display:none;" class="btn btn-inverse" 
+        onclick="resumeBtn()" type="button">RESUME</button>
+        
+	<!-- Reset Button -->
+        <button style="width:25%;" class="btn btn-inverse" 
+        onclick="resetBtn()" type="button">RESET</button>
+            
+            
+            </div>
+ <!-- div for main-timer -->
+ </div>
+
+
+</div>
+<script src="docs/prettify.js"></script>
+<script src="docs/application.js"></script>
+
+<script src="docs/jquery.fittext.js"></script>
+	<script type="text/javascript">
+		$("#largeTime").fitText(0.5, { minFontSize: '100px', maxFontSize: '750px' });
+		$("#smallTime").fitText(0.4, { minFontSize: '35px', maxFontSize: '100px' });
+		$("#smallTime2").fitText(0.4, { minFontSize: '35px', maxFontSize: '100px' });
+		$("#smallTime3").fitText(0.4, { minFontSize: '35px', maxFontSize: '100px' });
+	</script>
+
+
+</body>
+
+</html>
